@@ -15,18 +15,6 @@ type Roku struct {
 	logger hclog.Logger
 }
 
-func (r *Roku) Query() string {
-	r.logger.Debug("Attempting to Query Device Info")
-
-	pressHome(r.ip)
-	return queryInfo(r.ip)
-}
-
-func (r *Roku) Kill() {
-	r.logger.Debug("Attempting to Query Device Info")
-	KillClient()
-}
-
 func (r *Roku) Initialize(settings map[string]string) plugins.InitializeResult {
 
 	p, err := strconv.Atoi(settings["port"])
@@ -43,6 +31,19 @@ func (r *Roku) Initialize(settings map[string]string) plugins.InitializeResult {
 	r.logger.Debug("Configured Roku settings %+v", settings)
 
 	return 1
+}
+
+func (r *Roku) Query() string {
+	r.logger.Debug("Attempting to Query Device Info")
+
+	pressHome(r.ip)
+	q := queryInfo(r.ip)
+	return "DEVICE INFORMATION: \n\n\n" + q
+}
+
+func (r *Roku) Kill() {
+	r.logger.Debug("Attempting to Query Device Info")
+	KillClient()
 }
 
 // handshakeConfigs are used to just do a basic handshake between

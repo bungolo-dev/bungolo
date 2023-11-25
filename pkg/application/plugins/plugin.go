@@ -14,7 +14,6 @@ import (
 var pluginCfg map[string]PluginConfig = map[string]PluginConfig{
 	"roku1": {Id: "roku1", ExePath: "../roku/roku.exe", Type: "device", Settings: map[string]string{"ip": "10.0.0.62", "port": "8060"}},
 	"roku2": {Id: "roku2", ExePath: "../roku/roku.exe", Type: "device", Settings: map[string]string{"ip": "10.0.0.245", "port": "8060"}},
-	//"roku3": {Id: "roku3", ExePath: "../roku/roku.exe", Type: "device", Settings: map[string]string{"ip": "10.0.0.153", "port": "8060"}},
 }
 
 var devices map[string]*DeviceDriver = map[string]*DeviceDriver{}
