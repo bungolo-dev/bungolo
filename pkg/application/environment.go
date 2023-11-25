@@ -8,14 +8,16 @@ import (
 var environment *EnvironmentConfig
 
 type EnvironmentConfig struct {
-	BaseDirectory string
-	ImgDirectory  string
+	BaseDirectory   string
+	ImgDirectory    string
+	PluginDirectory string
 }
 
 func NewEnvironment(baseDirectory string, imgDirectory string) (Environment, error) {
 	env := &EnvironmentConfig{
-		BaseDirectory: "C://Temp/Bungolow",
-		ImgDirectory:  "C://Temp/Images",
+		BaseDirectory:   "C://Temp/Bungolow",
+		ImgDirectory:    "C://Temp/Images",
+		PluginDirectory: "C://Temp/Plugins",
 	}
 
 	environment = env
@@ -28,6 +30,11 @@ func NewEnvironment(baseDirectory string, imgDirectory string) (Environment, err
 	imgErr := os.Mkdir(env.ImgDirectory, 0755)
 	if imgErr != nil {
 		return nil, imgErr
+	}
+
+	plErr := os.Mkdir(env.PluginDirectory, 0755)
+	if plErr != nil {
+		return nil, plErr
 	}
 
 	return env, nil
