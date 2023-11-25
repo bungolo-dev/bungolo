@@ -2,7 +2,7 @@ package infrustucture
 
 import (
 	bungolow "github.com/bungolow-dev/bungolow/pkg/application"
-	"github.com/bungolow-dev/bungolow/pkg/domain/room"
+	room "github.com/bungolow-dev/bungolow/pkg/domain/room"
 )
 
 func (database *Database) CreateRoom(name string, image string) (room.RoomId, error) {
