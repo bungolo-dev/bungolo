@@ -1,4 +1,4 @@
-package repository
+package rooms
 
 import "github.com/bungolow-dev/bungolow/pkg/domain/room"
 
