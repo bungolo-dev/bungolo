@@ -25,7 +25,7 @@ func GetImages(w http.ResponseWriter, r *http.Request) {
 	json, err := json.MarshalIndent(imgs, "", "	")
 
 	if err != nil {
-		HandleError(w, 500, err)
+		bungolow.HandleError(w, 500, err)
 	}
 
 	w.Write(json)
@@ -55,21 +55,21 @@ func PostImage(w http.ResponseWriter, r *http.Request) {
 
 	file, header, err := r.FormFile("file")
 	if err != nil {
-		HandleError(w, http.StatusBadRequest, err)
+		bungolow.HandleError(w, http.StatusBadRequest, err)
 		return
 	}
 	defer file.Close()
 	var buf bytes.Buffer
 	_, cpError := io.Copy(&buf, file)
 	if cpError != nil {
-		HandleError(w, http.StatusBadRequest, cpError)
+		bungolow.HandleError(w, http.StatusBadRequest, cpError)
 		return
 	}
 
 	image, saveError := CreateImage(header.Filename, buf.Bytes())
 
 	if saveError != nil {
-		HandleError(w, http.StatusBadRequest, saveError)
+		bungolow.HandleError(w, http.StatusBadRequest, saveError)
 		return
 	}
 
@@ -77,14 +77,9 @@ func PostImage(w http.ResponseWriter, r *http.Request) {
 
 	json, jsonError := json.MarshalIndent(image, "", "   ")
 	if jsonError != nil {
-		HandleError(w, http.StatusInternalServerError, jsonError)
+		bungolow.HandleError(w, http.StatusInternalServerError, jsonError)
 	}
 
 	w.Write(json)
 
-}
-
-func HandleError(w http.ResponseWriter, status int, err error) {
-	w.WriteHeader(status)
-	w.Write([]byte(err.Error()))
 }

@@ -17,11 +17,11 @@ func main() {
 
 	bungolow.NewEnvironment("C://Temp/Bungolow", "C://Temp/Images")
 
-	pluginErrors := plugins.StartPlugins()
-	if pluginErrors != nil {
+	pler := plugins.StartPlugins()
+
+	if pler != nil {
 
 	}
-
 	db := infrustucture.CreateDatabase()
 	err := db.Initialize()
 	if err != nil {
@@ -43,6 +43,7 @@ func main() {
 
 	rooms.UseRoomsHandlers(r)
 	images.UseImageHandlers(r)
+	plugins.UsePluginHandlers(r)
 
 	http.ListenAndServe(":3000", r)
 }
