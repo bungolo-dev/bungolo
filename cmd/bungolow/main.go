@@ -5,6 +5,7 @@ import (
 
 	bungolow "github.com/bungolow-dev/bungolow/pkg/application"
 	"github.com/bungolow-dev/bungolow/pkg/application/images"
+	"github.com/bungolow-dev/bungolow/pkg/application/plugins"
 	"github.com/bungolow-dev/bungolow/pkg/application/rooms"
 	"github.com/bungolow-dev/bungolow/pkg/infrustucture"
 
@@ -15,6 +16,11 @@ import (
 func main() {
 
 	bungolow.NewEnvironment("C://Temp/Bungolow", "C://Temp/Images")
+
+	pluginErrors := plugins.StartPlugins()
+	if pluginErrors != nil {
+
+	}
 
 	db := infrustucture.CreateDatabase()
 	err := db.Initialize()
