@@ -1,6 +1,6 @@
 package plugins
 
 type Plugin interface {
-	Register()
-	Initialize(settings map[string]any)
+	Register() error
+	Initialize(settings map[string]interface{})
 }
